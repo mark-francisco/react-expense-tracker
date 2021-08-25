@@ -8,6 +8,7 @@ const ExpenseForm = () => {
   const [enteredDate, setEnteredDate] = useState("");
 
   // "event" object comes included with all event listener functions in vanilla js
+  // pass a callback fn into the state updating fn if the new state is dependent on the previous state's values
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
   };
@@ -18,20 +19,36 @@ const ExpenseForm = () => {
     setEnteredDate(event.target.value);
   };
 
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    const expenseData = {
+      title: enteredTitle,
+      amount: enteredAmount,
+      date: new Date(enteredDate),
+    };
+
+    console.log(expenseData);
+
+    setEnteredTitle("");
+    setEnteredAmount("");
+    setEnteredDate("");
+  };
+
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
-          <input type="text" onChange={titleChangeHandler} />
+          <input type="text" value={enteredTitle} onChange={titleChangeHandler} />
         </div>
         <div className="new-expense__control">
           <label>Amount</label>
-          <input type="number" onChange={amountChangeHandler} min="0.01" step="0.01" />
+          <input type="number" value={enteredAmount} onChange={amountChangeHandler} min="0.01" step="0.01" />
         </div>
         <div className="new-expense__control">
           <label>Date</label>
-          <input type="date" onChange={dateChangeHandler} min="2019-01-01" max="2022-12-31" />
+          <input type="date" value={enteredDate} onChange={dateChangeHandler} min="2019-01-01" max="2022-12-31" />
         </div>
       </div>
       <div className="new-expense__actions">

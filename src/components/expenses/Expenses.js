@@ -21,10 +21,14 @@ function Expenses(props) {
       <Card className="expenses">
         <ExpenseFilter onChangeYear={filteredYearHandler} currentYear={filteredYear} />
 
+        {/* if both conditions are true, vanilla JS will return the second value */}
+        {filteredExpenses.length === 0 && <p>No expenses found.</p>}
+
         {/* React can render an array of JSX elements */}
-        {filteredExpenses.map((expense) => {
-          return <ExpenseItem key={expense.id} title={expense.title} date={expense.date} amount={expense.amount} />;
-        })}
+        {filteredExpenses.length > 0 &&
+          filteredExpenses.map((expense) => {
+            return <ExpenseItem key={expense.id} title={expense.title} date={expense.date} amount={expense.amount} />;
+          })}
       </Card>
     </div>
   );

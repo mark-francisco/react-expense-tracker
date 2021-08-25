@@ -8,7 +8,7 @@ const ExpenseForm = (props) => {
   const [enteredDate, setEnteredDate] = useState("");
 
   // "event" object comes included with all event listener functions in vanilla js
-  // pass a callback fn into the state updating fn if the new state is dependent on the previous state's values
+  // pass a callback fn into the state updating fn if the new state is dependent on the previous state's values. the callback fn should accept prevState as its argument, and should return either a value or an object with the new desired state value.
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
   };
